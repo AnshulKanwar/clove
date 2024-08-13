@@ -17,7 +17,7 @@ export default function Task({ task }: { task: TTask }) {
       style={style}
       {...listeners}
       {...attributes}
-      className="bg-white p-5 rounded-xl"
+      className="bg-background p-5 rounded-xl shadow-lg"
     >
       {task.title}
     </div>
