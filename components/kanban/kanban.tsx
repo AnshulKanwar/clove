@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import Board from "./board";
 import { Status } from "@/lib/types";
+import Droppable from "./droppable";
+import { DragEndEvent } from "@dnd-kit/core";
 
 export default async function Kanban() {
   const supabase = createClient();
@@ -11,10 +13,12 @@ export default async function Kanban() {
   }
 
   return (
-    <div className="h-full p-3 grid grid-cols-3 gap-3">
-      <Board name="Todo" tasks={filterTasks("todo")!} />
-      <Board name="Doing" tasks={filterTasks("doing")!} />
-      <Board name="Done" tasks={filterTasks("done")!} />
-    </div>
+    <Droppable>
+      <div className="h-full p-3 grid grid-cols-3 gap-3">
+        <Board id="todo" tasks={filterTasks("todo")!} />
+        <Board id="doing" tasks={filterTasks("doing")!} />
+        <Board id="done" tasks={filterTasks("done")!} />
+      </div>
+    </Droppable>
   );
 }
