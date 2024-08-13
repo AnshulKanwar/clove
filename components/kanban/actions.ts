@@ -17,8 +17,6 @@ export async function createTask(title: string) {
     .from("tasks")
     .insert({ title, user_id: user!.id });
 
-  console.log(error);
-
   revalidatePath("/");
 }
 
@@ -30,6 +28,14 @@ export async function moveTask(id: number, status: Status) {
     .from("tasks")
     .update({ status })
     .eq("id", id);
+
+  revalidatePath("/");
+}
+
+export async function deleteTask(id: number) {
+  const supabase = createClient();
+
+  const response = await supabase.from("tasks").delete().eq("id", id);
 
   revalidatePath("/");
 }
