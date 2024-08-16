@@ -20,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={cn("h-full font-sans antialiased", fontSans.variable)}>
+    <html lang="en">
+      <body
+        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
+      >
         <Nav />
         {children}
       </body>
