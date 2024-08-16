@@ -6,7 +6,8 @@ export default async function TaskPage({ params }: { params: { id: number } }) {
   const { data, error } = await supabase
     .from("tasks")
     .select()
-    .eq("parent", params.id);
+    .eq("id", params.id)
+    .single();
 
-  return <Kanban tasks={data!} />;
+  return <Kanban task={data!} />;
 }

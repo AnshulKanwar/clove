@@ -12,23 +12,33 @@ export type Database = {
       tasks: {
         Row: {
           id: number
+          parent: number | null
           status: Database["public"]["Enums"]["status"]
           title: string | null
           user_id: string
         }
         Insert: {
           id?: number
+          parent?: number | null
           status?: Database["public"]["Enums"]["status"]
           title?: string | null
           user_id: string
         }
         Update: {
           id?: number
+          parent?: number | null
           status?: Database["public"]["Enums"]["status"]
           title?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "tasks_parent_fkey"
+            columns: ["parent"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "tasks_user_id_fkey"
             columns: ["user_id"]
