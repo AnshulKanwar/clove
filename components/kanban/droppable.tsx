@@ -1,13 +1,23 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
 import { Status } from "@/lib/types";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { revalidatePath } from "next/cache";
+import {
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { moveTask } from "./actions";
 
 export default function Droppable({ children }: { children: React.ReactNode }) {
-  const supabase = createClient();
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 15,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor);
 
   async function handleDragEnd(event: DragEndEvent) {
     if (event.over != null) {
@@ -17,5 +27,10 @@ export default function Droppable({ children }: { children: React.ReactNode }) {
       moveTask(taskId, status);
     }
   }
-  return <DndContext onDragEnd={handleDragEnd}>{children}</DndContext>;
+
+  return (
+    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      {children}
+    </DndContext>
+  );
 }

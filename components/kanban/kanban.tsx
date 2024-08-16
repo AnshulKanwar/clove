@@ -2,8 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import Board from "./board";
 import { Status } from "@/lib/types";
 import Droppable from "./droppable";
-import { DragEndEvent } from "@dnd-kit/core";
-import { Plus } from "lucide-react";
 import AddTask from "./add-task";
 
 export default async function Kanban() {

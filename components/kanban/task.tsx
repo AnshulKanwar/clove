@@ -20,7 +20,7 @@ export default function Task({ task }: { task: TTask }) {
       style={style}
       {...listeners}
       {...attributes}
-      className="bg-background p-5 rounded-xl shadow-lg group"
+      className="bg-background p-5 rounded group"
     >
       <div className="flex justify-between items-center">
         <span className="py-2">{task.title}</span>
