@@ -5,11 +5,13 @@ import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
 import { deleteTask } from "./actions";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function Task({ task }: { task: TTask }) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: task.id,
-  });
+  const { isDragging, attributes, listeners, setNodeRef, transform } =
+    useDraggable({
+      id: task.id,
+    });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -22,7 +24,9 @@ export default function Task({ task }: { task: TTask }) {
         style={style}
         {...listeners}
         {...attributes}
-        className="bg-background p-5 rounded group"
+        className={cn("bg-background p-5 rounded group", {
+          "shadow-2xl": isDragging,
+        })}
       >
         <div className="flex justify-between items-center">
           <span className="py-2">{task.title}</span>
