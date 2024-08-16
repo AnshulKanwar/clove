@@ -1,15 +1,11 @@
-import { createClient } from "@/lib/supabase/server";
 import Board from "./board";
-import { Status } from "@/lib/types";
+import { Status, TTask } from "@/lib/types";
 import Droppable from "./droppable";
 import AddTask from "./add-task";
 
-export default async function Kanban() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("tasks").select();
-
+export default async function Kanban({ tasks }: { tasks: TTask[] }) {
   function filterTasks(status: Status) {
-    return data?.filter((task) => task.status === status);
+    return tasks.filter((task) => task.status === status);
   }
 
   return (
