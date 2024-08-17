@@ -34,7 +34,7 @@ export default async function TaskNav({ task }: { task?: TTask }) {
         </div>
       )}
       <div className="ml-auto">
-        <AddTask />
+        <AddTask parent={task} />
       </div>
     </nav>
   );

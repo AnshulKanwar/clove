@@ -14,8 +14,9 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useState } from "react";
 import { createTask } from "./actions";
+import { TTask } from "@/lib/types";
 
-export default function AddTask() {
+export default function AddTask({ parent }: { parent?: TTask }) {
   const [title, setTitle] = useState("");
 
   return (
@@ -43,7 +44,7 @@ export default function AddTask() {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit" onClick={() => createTask(title)}>
+            <Button type="submit" onClick={() => createTask(title, parent)}>
               Add task
             </Button>
           </DialogClose>

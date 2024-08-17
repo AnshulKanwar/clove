@@ -1,10 +1,10 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { Status } from "@/lib/types";
+import { Status, TTask } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
-export async function createTask(title: string) {
+export async function createTask(title: string, parent?: TTask) {
   const supabase = createClient();
 
   // TODO: error handling
@@ -15,7 +15,7 @@ export async function createTask(title: string) {
   // TODO: error handling
   const { error } = await supabase
     .from("tasks")
-    .insert({ title, user_id: user!.id });
+    .insert({ title, user_id: user!.id, parent: parent ? parent.id : null });
 
   revalidatePath("/");
 }
