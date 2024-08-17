@@ -25,7 +25,7 @@ export default function RootLayout({
         className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
       >
         <Nav />
-        {children}
+        <div className="h-[calc(100vh-80px)]">{children}</div>
       </body>
     </html>
   );

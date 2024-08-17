@@ -1,7 +1,6 @@
 import Board from "./board";
 import { Status, TTask } from "@/lib/types";
 import Droppable from "./droppable";
-import AddTask from "./add-task";
 import { createClient } from "@/lib/supabase/server";
 import TaskNav from "./task-nav";
 
@@ -32,12 +31,7 @@ export default async function Kanban({ task }: { task?: TTask }) {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex p-5">
-        {task && <TaskNav task={task} />}
-        <div className="ml-auto">
-          <AddTask />
-        </div>
-      </div>
+      <TaskNav task={task} />
       <Droppable>
         <div className="grow px-3 pb-3 grid grid-cols-3 gap-3">
           <Board id="todo" tasks={filterTasks("todo")!} />
